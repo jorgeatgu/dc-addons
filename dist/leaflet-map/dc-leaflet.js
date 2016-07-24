@@ -1,7 +1,7 @@
 /*!
- * dc-addons v0.13.1
+ * dc-addons v0.13.2
  *
- * 2016-04-08 11:34:39
+ * 2016-07-25 08:05:58
  *
  */
 (function () {
@@ -309,7 +309,6 @@
         var _zooming = false;
         var _layerGroup = false;
         var _markerList = {};
-        var _currentGroups = false;
 
         var _fitOnRender = true;
         var _fitOnRedraw = false;
@@ -369,10 +368,6 @@
             var groups = _chart._computeOrderedGroups(_chart.data()).filter(function (d) {
                 return _chart.valueAccessor()(d) !== 0;
             });
-            if (_currentGroups && _currentGroups.toString() === groups.toString()) {
-                return;
-            }
-            _currentGroups = groups;
 
             if (_rebuildMarkers) {
                 _markerList = {};
@@ -389,6 +384,16 @@
                 else {
                     marker = createmarker(v,key);
                 }
+
+                var curFilters = _chart.filters();
+                var markerOpacity = curFilters.length ? 0.3 : 1.0;
+                curFilters.forEach(function (filter) {
+                    if (key === filter) {
+                        markerOpacity = 1.0;
+                    }
+                });
+                marker.setOpacity(markerOpacity);
+
                 if (!_chart.cluster()) {
                     _layerGroup.addLayer(marker);
                 }
