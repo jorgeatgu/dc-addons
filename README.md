@@ -80,7 +80,7 @@ dc.leafletChoroplethChart(parent,chartGroup)
   .zoom(7)                - get or set initial zoom level
   .map()                  - get map object
   .geojson()              - geojson object describing the features
-  .featureOptions()       - object or a function (feature) to set the options for each feature
+  .featureOptions()       - object or a function (feature, v) to set the options for each feature - warning this will override the d3 color scheming
   .featureKeyAccessor()   - function (feature) to return a feature property that would be compared to the group key; Defauft: feature.properties.key
   .popup()                - function (d,feature) to return the string or DOM content of a popup
   .renderPopup(true)      - set if popups should be shown; Default: true
