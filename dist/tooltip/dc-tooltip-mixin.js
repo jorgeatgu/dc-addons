@@ -1,7 +1,7 @@
 /*!
- * dc-addons v0.13.4
+ * dc-addons v0.13.5
  *
- * 2016-08-05 08:19:30
+ * 2016-08-17 08:09:00
  *
  */
 (function () {
@@ -27,7 +27,7 @@
                     }
 
                     // get all elements that want a tooltip
-                    _chart.tip.elements = wrapper.selectAll('rect.bar,circle.dot,g.pie-slice path,circle.bubble,g.row rect');
+                    _chart.tip.elements = wrapper.selectAll('rect.bar,circle.dot,g.pie-slice,circle.bubble,g.row rect');
 
                     // nothing to tip so exit
                     if (_chart.tip.elements.empty()) {
