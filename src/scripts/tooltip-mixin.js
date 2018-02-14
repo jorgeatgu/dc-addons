@@ -21,7 +21,7 @@
                     }
 
                     // get all elements that want a tooltip
-                    _chart.tip.elements = wrapper.selectAll('rect.bar,circle.dot,g.pie-slice,circle.bubble,g.row rect');
+                    _chart.tip.elements = wrapper.selectAll('rect.bar,circle.dot,g.pie-slice,circle.bubble,g.row,g.node');
 
                     // nothing to tip so exit
                     if (_chart.tip.elements.empty()) {
