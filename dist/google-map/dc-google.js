@@ -399,7 +399,7 @@
             }
 
             if (_cluster) {
-                _layerGroup = new MarkerClusterer(_chart.map());
+                _layerGroup = new MarkerClusterer(_chart.map(), [], _clusterOptions);
             }
         };
 
