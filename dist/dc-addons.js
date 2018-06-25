@@ -1,7 +1,7 @@
 /*!
  * dc-addons v0.13.5
  *
- * 2016-08-17 08:09:00
+ * 2018-06-22 09:54:20
  *
  */
 if (!dc.utils.getAllFilters) {
@@ -1073,7 +1073,7 @@ dc.leafletLegend = function () {
             }
 
             if (_cluster) {
-                _layerGroup = new MarkerClusterer(_chart.map());
+                _layerGroup = new MarkerClusterer(_chart.map(), [], _clusterOptions);
             }
         };
 
@@ -1451,7 +1451,7 @@ dc.leafletLegend = function () {
                     }
 
                     // get all elements that want a tooltip
-                    _chart.tip.elements = wrapper.selectAll('rect.bar,circle.dot,g.pie-slice,circle.bubble,g.row rect');
+                    _chart.tip.elements = wrapper.selectAll('rect.bar,circle.dot,g.pie-slice,circle.bubble,g.row,g.node');
 
                     // nothing to tip so exit
                     if (_chart.tip.elements.empty()) {
