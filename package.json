@@ -1,18 +1,15 @@
 {
   "name": "dc-addons-paired-row",
   "description": "dc paired row as es module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "keywords": [
     "dc",
-    "dc-addons",
+    "dc-addons"
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "name": "@jorgeatgu/dc-addons-paired-row",
   "repository": "https://github.com/jorgeatgu/dc-addons-paired-row",
-  "main": "index.js"
+  "main": "index.js",
   "dependencies": {
+    "crossfilter2": "^1.5.2",
     "d3": "^4.x",
     "dc": "^3.0.8"
   },
