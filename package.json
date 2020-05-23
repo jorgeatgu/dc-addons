@@ -1,7 +1,17 @@
 {
-  "name": "dc-addons-piramid",
-  "version": "3.0.0",
-  "repository": "https://github.com/jorgeatgu/dc-addons-piramid",
+  "name": "dc-addons-paired-row",
+  "description": "dc paired row as es module",
+  "version": "0.1.0",
+  "keywords": [
+    "dc",
+    "dc-addons",
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "name": "@jorgeatgu/dc-addons-paired-row",
+  "repository": "https://github.com/jorgeatgu/dc-addons-paired-row",
+  "main": "index.js"
   "dependencies": {
     "d3": "^4.x",
     "dc": "^3.0.8"
