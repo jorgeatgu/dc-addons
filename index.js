@@ -1,5 +1,3 @@
-// Code copied and changed from https://github.com/vlandham/gates_bubbles
-
 //TODO: import d3 as module d3-select d3-scaleLinear
 import * as d3 from 'd3';
 import dc from 'dc';
