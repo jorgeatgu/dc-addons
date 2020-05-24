@@ -106,6 +106,7 @@ export default function(parent, chartGroup) {
       _leftChart.filter(filter);
       _rightChart.filter(filter);
       _leftChart.redrawGroup();
+      dc.redrawAll()
     });
   };
 

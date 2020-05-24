@@ -1,10 +1,10 @@
-# DC Addons Paired Row
+# DC Addons Population Pyramid Chart
 
-⚠️⚠️ [WIP] ⚠️⚠️
+⚠️ Use with caution
 
-This [dc.js](http://dc-js.github.io/dc.js/) addon provides a paired row.
+This [dc.js](http://dc-js.github.io/dc.js/) addon provides a Population Pyramid Chart.
 
-Fork dc-addons-paired-row to build a Piramid Population Chart.
+Fork dc-addons to build a Population Piramid Chart.
 
 ```
 yarn add dc-addons-paired-row
@@ -13,12 +13,14 @@ npm i dc-addons-paired-row
 
 ## Example 
 ```
+js
 import pairedRow from 'dc-addons-paired-row'
 import * as d3 from 'd3';
 import crossfilter from 'crossfilter2'
 import dc from 'dc'
 
 var chart = pairedRow('#chart');
+dc.chartRegistry.register(chart, 'main');
 var filter = dc.pieChart('#filter', 'main');
 var state = dc.pieChart('#state', 'main');
 
@@ -126,16 +128,13 @@ d3.csv('data/demo3.csv', function(error, experiments) {
       return d.key[0] === 'Female';
     },
   })
-   chart.render(piramidChart())
+
+  chart.render(piramidChart())
 
   filter.options({
     dimension: genderDimension,
     group: genderGroup
   })
-
-  chart.chartGroup('main')
-  dc.chartRegistry.register(chart, "main");
-
 
   state.options({
     dimension: stateDimension,
@@ -156,40 +155,66 @@ d3.csv('data/demo3.csv', function(error, experiments) {
     .attr('opacity', 0)
 });
 
+//Create a Piramid population Chart
 function piramidChart() {
   setTimeout(() => {
+    //Only get the rows of the left chart.
     let selectLeftRows = d3.selectAll('.left-chart g.row rect')
     selectLeftRows = selectLeftRows._groups[0]
     const leftChart = d3.select('.left-chart')
+    //Get the size of the left chart. 30 isn't a magic number, is the margin right of the chart.
     const widthLeftchart = leftChart._groups[0][0].clientWidth - 30
     selectLeftRows.forEach(rect => {
+      //Get the width of the every rect inside a row
       const rectWidth = rect.width.animVal.value
-      const translateREct = widthLeftchart - rectWidth
+      //Substract width of the chart minus width of the rect, with this now move rect to right position
+      const translateRectToRight = widthLeftchart - rectWidth
 
+      //Hack to create a tricky animation
+      //First set a width with zero
       rect.setAttribute('width', 0)
-      rect.setAttribute('x', translateREct)
+      //Second, use translateRectToRight to move rect
+      rect.setAttribute('x', translateRectToRight)
+      //Finally, set again the width of the rect, we need a class with CSS animation
       rect.setAttribute('width', rectWidth)
     })
     let allRects = d3.selectAll('g.row')
     allRects.attr('opacity', 1)
+    //Hack, force to redrawAll dc-charts when user click on every row
+    document.querySelectorAll("g.row").forEach(row => row.addEventListener('click', () => {
+      dc.redrawAll('main');
+    }));
+    //Why???? because the timing of the dc.js animation is about 1000ms
   }, 1000)
+
 }
 ```
 
 ```
-  .left-chart.dc-chart g.row text {
-    display: none; }
+css
+.left-chart.dc-chart g.row text {
+  display: none;
+}
 
-  .dc-chart .axis {
-    display: none; }
+.dc-chart .axis {
+  display: none;
+}
 
-  .dc-chart rect {
-    rx: 5px;
-    transition: all .3s ease-in-out; }
+.dc-chart .axis-y {
+  display: block;
+}
 
-  .right-chart.dc-chart g.row text.titlerow {
-    display: none; }
+.dc-chart rect {
+  rx: 5px;
+  transition: all .3s ease-in-out;
+}
 
-  .right-chart.dc-chart g.row text {
-    fill: #111; }
+.right-chart.dc-chart g.row text.titlerow {
+  display: none;
+}
+
+.right-chart.dc-chart g.row text {
+  fill: #111;
+  pointer-events: none;
+}
 ```
