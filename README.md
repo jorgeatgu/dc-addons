@@ -1,4 +1,4 @@
-# DC Addons Population Pyramid Chart
+# DC Addons: Population Pyramid Chart
 
 ⚠️ Use with caution
 
@@ -6,14 +6,13 @@ This [dc.js](http://dc-js.github.io/dc.js/) addon provides a Population Pyramid 
 
 Fork dc-addons to build a Population Piramid Chart.
 
-```
+```zsh
 yarn add dc-addons-paired-row
 npm i dc-addons-paired-row
 ```
 
 ## Example 
-```
-js
+```js
 import pairedRow from 'dc-addons-paired-row'
 import * as d3 from 'd3';
 import crossfilter from 'crossfilter2'
@@ -190,8 +189,7 @@ function piramidChart() {
 }
 ```
 
-```
-css
+```css
 .left-chart.dc-chart g.row text {
   display: none;
 }
