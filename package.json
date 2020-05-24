@@ -1,7 +1,7 @@
 {
   "name": "dc-addons-paired-row",
   "description": "dc paired row as es module",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "keywords": [
     "dc",
     "dc-addons"
