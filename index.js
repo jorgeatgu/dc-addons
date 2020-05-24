@@ -1,19 +1,18 @@
-//TODO: import d3 as module d3-select d3-scaleLinear
-import * as d3 from 'd3';
+import { select, selectAll } from 'd3-selection';
+import { scaleLinear } from 'd3-scale';
+import { extent } from 'd3-array';
 import dc from 'dc';
+
+const d3 = { select, selectAll, scaleLinear, extent }
 
 export default function(parent, chartGroup) {
   var _chart = dc.capMixin(dc.marginMixin(dc.colorMixin(dc.baseMixin({}))));
 
-  var _leftChartWrapper = d3.select(parent).append('div');
-  var _rightChartWrapper = d3.select(parent).append('div');
+  var _leftChartWrapper = d3.select(parent).append('div').attr('class', 'left-chart');
+  var _rightChartWrapper = d3.select(parent).append('div').attr('class', 'right-chart');
 
   var _leftChart = dc.rowChart(_leftChartWrapper, chartGroup);
   var _rightChart = dc.rowChart(_rightChartWrapper, chartGroup);
-
-  if (_leftChart.useRightYAxis) {
-    _leftChart.useRightYAxis(true);
-  }
 
   // data filtering
 
@@ -135,7 +134,7 @@ export default function(parent, chartGroup) {
       top: _.top,
       right: _.right,
       bottom: _.bottom,
-      left: 0,
+      left: 60,
     });
 
     return _chart;
