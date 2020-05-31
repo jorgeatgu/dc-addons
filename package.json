@@ -1,27 +1,19 @@
 {
   "name": "dc-addons-paired-row",
-  "description": "dc paired row as es module",
+  "description": "Created a Pyramid Population",
   "version": "0.91.0",
   "keywords": [
     "dc",
-    "dc-addons"
+    "pyramid-population",
+    "chart"
   ],
   "repository": "https://github.com/jorgeatgu/dc-addons-paired-row",
   "main": "index.js",
   "dependencies": {
-    "crossfilter2": "^1.5.2",
     "d3": "^4.x",
     "dc": "^3.0.8"
   },
-  "devDependencies": {
-    "eslint": "^5.7.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
-  },
   "engines": {
     "node": ">=6"
-  },
-  "scripts": {}
+  }
 }

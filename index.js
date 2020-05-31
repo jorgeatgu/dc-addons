@@ -105,8 +105,6 @@ export default function(parent, chartGroup) {
     dc.events.trigger(function() {
       _leftChart.filter(filter);
       _rightChart.filter(filter);
-      _leftChart.redrawGroup();
-      dc.redrawAll()
     });
   };
 
@@ -156,7 +154,7 @@ export default function(parent, chartGroup) {
     _leftChart.width(dc.utils.isNumber(_) ? _ / 2 : _);
 
     // set right chart width
-    _rightChart.width(dc.utils.isNumber(_) ? _ / 2 : _);
+    _rightChart.width(dc.utils.isNumber(_) ? _ / 2 + 60 : _);
 
     return _chart;
   };
@@ -271,6 +269,66 @@ export default function(parent, chartGroup) {
   for (i = 0; i < _passOnFunctions.length; i++) {
     addPassOnFunctions(_passOnFunctions[i]);
   }
+
+
+  function pyramidChart() {
+    setTimeout(() => {
+      const leftChartId = document.querySelector('.left-chart')
+      const leftChartClassName = leftChartId.classList.contains('init-left-chart')
+      if (!leftChartClassName) {
+        const leftChart = d3.select('.left-chart')
+        let selectLeftRows = d3.selectAll('.left-chart g.row rect')
+        selectLeftRows.style('opacity', '0')
+          .attr('x', leftChart._groups[0][0].clientWidth)
+        leftChartId.classList.add('init-left-chart')
+      }
+    }, 150)
+    setTimeout(() => {
+      let selectLeftRows = d3.selectAll('.left-chart g.row rect')
+      selectLeftRows.style('opacity', '1')
+      selectLeftRows = selectLeftRows._groups[0]
+      const leftChart = d3.select('.left-chart')
+      //Get the size of the left chart. 30 isn't a magic number, is the margin right of the chart.
+      const widthLeftchart = leftChart._groups[0][0].clientWidth - 30
+      selectLeftRows.forEach(rect => {
+        //Get the width of the every rect inside a row
+        const rectWidth = rect.width.animVal.value
+        //Substract width of the chart minus width of the rect, with this now move rect to right position
+        const translateRectToRight = widthLeftchart - rectWidth
+        //Hack to create a tricky animation
+        rect.setAttribute('x', translateRectToRight)
+        //Finally, set again the width of the rect, we need a class with CSS animation
+        rect.setAttribute('width', rectWidth)
+      })
+    }, 750)
+  }
+
+  _leftChart.on('pretransition', function() {
+    pyramidChart()
+  });
+
+  const stopTranslateRight = function(element) {
+    d3.selectAll(element)
+      .attr('transform', 'translate(0,0)')
+      .transition()
+      .duration(500)
+  }
+
+  _rightChart.on('preRedraw', function() {
+    stopTranslateRight('.right-chart g.row text.row')
+  });
+
+  _rightChart.on('pretransition', function() {
+    stopTranslateRight('.right-chart g.row text.row')
+  });
+
+  _rightChart.on('preRender', function() {
+    stopTranslateRight('.right-chart g.row text.row')
+  });
+
+  _chart.pyramidChart = function() {
+    pyramidChart()
+  };
 
   return _chart.anchor(parent, chartGroup);
 }
