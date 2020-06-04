@@ -1,17 +1,16 @@
-# DC Addons Population Pyramid Chart
+# DC Addons: Population Pyramid Chart
 
 ⚠️ Use with caution
 
 This chart is a forked of the dc-addons-paired-rows chart from [dc-addons](https://github.com/Intellipharm/dc-addons) to build a population pyramid chart.
 
-```
+```zsh
 yarn add dc-addons-paired-row
 npm i dc-addons-paired-row
 ```
 
 ## Example 
-```
-js
+```js
 import pairedRow from 'dc-addons-paired-row'
 import * as d3 from 'd3';
 import crossfilter from 'crossfilter2'
@@ -155,8 +154,7 @@ d3.csv('data/demo3.csv', function(error, experiments) {
 });
 ```
 
-```
-css
+```css
 .left-chart.dc-chart g.row text {
   display: none;
 }
